@@ -1,0 +1,102 @@
+/* Styles for ScrollingInsightsTickerComponent */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:host {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f9fa; /* Light background for the ticker bar */
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  animation: fadeInSlideUp 0.7s ease-out forwards; /* Apply entrance animation */
+}
+
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap; /* Prevent items from wrapping to next line */
+}
+
+.ticker-move {
+  display: inline-block; /* Allows transform to work correctly and items to be side-by-side */
+  white-space: nowrap;
+  /* Animation will be applied here */
+  /* Calculate animation duration based on number of items and desired speed */
+  /* For example, 20 items * 2s/item = 40s. Duplicate for seamless loop. */
+  animation: scroll-left 40s linear infinite;
+}
+
+.ticker-item {
+  display: inline-flex; /* Align icon and text nicely */
+  align-items: center;
+  padding: 0 1.5rem; /* Spacing between items */
+  font-size: 0.9rem;
+  color: #333;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* For hover effect */
+  cursor: default; /* Indicate items are not clickable by default, but can be interacted with */
+}
+
+.ticker-item i { /* Style for font icons */
+  margin-right: 0.5rem;
+  font-size: 1.1em; /* Slightly larger than text for visibility */
+  line-height: 1; /* Ensure proper vertical alignment */
+}
+
+.ticker-item:hover {
+  transform: scale(1.05); /* Slight scale up */
+  /* background-color: #fff; Optional: change background on hover */
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); Optional: add a more prominent shadow */
+}
+
+.ticker-icon-img {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.ticker-text {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+.ticker-value {
+  font-weight: bold;
+}
+
+.trend-up {
+  color: #28a745; /* Green for up */
+}
+
+.trend-down {
+  color: #dc3545; /* Red for down */
+}
+
+.trend-neutral {
+  color: #6c757d; /* Grey for neutral */
+}
+
+/* Keyframes for scrolling */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%); /* Scrolls one full set of items */
+  }
+}
+
+/* Pause animation on hover over the entire ticker */
+.ticker-wrap:hover .ticker-move {
+  animation-play-state: paused;
+}

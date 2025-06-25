@@ -1,0 +1,40 @@
+<div class="ticker-wrap">
+  <div class="ticker-move">
+    <!-- First set of items -->
+    @for (item of insightItems; track item.id) {
+      <div class="ticker-item">
+        @if (item.iconClass) {
+          <i [class]="item.iconClass"></i>
+        } @else if (item.imageUrl) {
+          <img [src]="item.imageUrl" [alt]="item.text + ' icon'" class="ticker-icon-img">
+        }
+        <span class="ticker-text">{{ item.text }}</span>
+        @if (item.value) {
+          <span class="ticker-value" [ngClass]="{
+            'trend-up': item.trend === 'up',
+            'trend-down': item.trend === 'down',
+            'trend-neutral': item.trend === 'neutral'
+          }">{{ item.value }}</span>
+        }
+      </div>
+    }
+    <!-- Second set of items (duplicate for seamless loop) -->
+    @for (item of insightItems; track item.id + '-dup') { <!-- Ensure unique trackBy for duplicates -->
+      <div class="ticker-item">
+        @if (item.iconClass) {
+          <i [class]="item.iconClass"></i>
+        } @else if (item.imageUrl) {
+          <img [src]="item.imageUrl" [alt]="item.text + ' icon'" class="ticker-icon-img">
+        }
+        <span class="ticker-text">{{ item.text }}</span>
+        @if (item.value) {
+          <span class="ticker-value" [ngClass]="{
+            'trend-up': item.trend === 'up',
+            'trend-down': item.trend === 'down',
+            'trend-neutral': item.trend === 'neutral'
+          }">{{ item.value }}</span>
+        }
+      </div>
+    }
+  </div>
+</div>

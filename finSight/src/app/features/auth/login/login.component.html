@@ -1,4 +1,5 @@
-<div class="login-container">
+<app-scrolling-insights-ticker></app-scrolling-insights-ticker>
+<div class="login-container mt-4"> {/* Added mt-4 for spacing from ticker */}
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     @if (errorMessage()) {

@@ -2,11 +2,12 @@ import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { ScrollingInsightsTickerComponent } from '../../../shared/components/scrolling-insights-ticker/scrolling-insights-ticker.component'; // Import the ticker
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ScrollingInsightsTickerComponent], // Add ScrollingInsightsTickerComponent
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   animations: [
