@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-// import { DashboardComponent } from './features/dashboard/dashboard.component'; // Comment out or remove
-import { LoginComponent } from './features/auth/login/login.component'; // Import LoginComponent
+import { AdvancedLoginPageComponent } from './features/auth/advanced-login-page/advanced-login-page.component'; // Import new component
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // imports: [DashboardComponent], // Comment out or remove
-  imports: [LoginComponent], // Add LoginComponent here
+  imports: [AdvancedLoginPageComponent], // Use new component
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

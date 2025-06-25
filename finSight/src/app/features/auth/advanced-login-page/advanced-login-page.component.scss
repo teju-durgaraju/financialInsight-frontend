@@ -1,0 +1,58 @@
+/* Styles for AdvancedLoginPageComponent */
+:host {
+  display: block;
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  /* Add any overall page styling here, like background if not covered by children */
+}
+
+/* Copied from LoginComponent.scss */
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+div.form-group { /* Make div selector more specific to avoid affecting other divs */
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #80bdff; /* Standard Bootstrap focus color */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Standard Bootstrap focus shadow */
+}
+
+.form-control.is-invalid:focus {
+  border-color: #dc3545; /* Bootstrap danger color */
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Bootstrap danger shadow */
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
