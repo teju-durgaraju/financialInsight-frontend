@@ -25,6 +25,22 @@ label {
 /* Bootstrap classes like .form-control and .btn handle most input and button styling.
    Custom styles below are for layout or specific overrides if needed. */
 
+.form-control {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #80bdff; /* Standard Bootstrap focus color */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Standard Bootstrap focus shadow */
+}
+
+/* Style for invalid fields, which can be combined with shake animation later */
+.form-control.is-invalid:focus {
+  border-color: #dc3545; /* Bootstrap danger color */
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Bootstrap danger shadow */
+}
+
+
 p {
   text-align: center;
   margin-top: 15px;
