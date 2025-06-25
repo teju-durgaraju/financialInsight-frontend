@@ -1,0 +1,200 @@
+/* Styles for FloatingLoginPageComponent */
+:host {
+  display: flex; /* Use flex to center login form container easily */
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.background-slideshow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Just in case */
+  z-index: -1; /* Behind the login form */
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  /* Each image is visible for 2s, fades over 0.5s in/out. Total cycle for 5 images = 10s. */
+  animation-name: imageCrossfade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s; /* 5 images * 2s per image */
+}
+
+@keyframes imageCrossfade {
+  0% { opacity: 0; }
+  5% { opacity: 1; } /* Fade in 0.5s (5% of 10s) */
+  20% { opacity: 1; } /* Stay visible for 1.5s (15% of 10s) (total visible 2s with fade in) */
+  25% { opacity: 0; } /* Fade out 0.5s (5% of 10s) */
+  100% { opacity: 0; }
+}
+
+/* Placeholder for the login form container that will be styled later */
+.login-form-container {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.15); /* Semi-translucent white */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Subtle shadow */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Slight border for definition */
+  width: 100%;
+  max-width: 420px; /* Max width of the form */
+  color: #fff; /* Default text color for contrast against dark backgrounds */
+}
+
+.login-form-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 300; /* Lighter font for modern look */
+  color: #fff;
+}
+
+.login-form-container .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.login-form-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+  color: #f0f0f0; /* Lighter label color */
+}
+
+.login-form-container .form-control {
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly more opaque for readability */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.login-form-container .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-form-container .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25); /* Focus glow */
+  color: #fff;
+}
+
+/* Styling for input groups and icons */
+.login-form-container .input-group {
+  position: relative; /* For precise icon positioning if needed */
+}
+
+.login-form-container .input-group .form-control {
+  /* Input takes full width, icons are overlaid or part of input-group */
+  padding-left: 2.5rem; /* Space for left icon if using absolute positioning for icon */
+  padding-right: 2.5rem; /* Space for right icon (password toggle) */
+}
+
+.login-form-container .input-group-text {
+  background-color: transparent; /* Make it part of the input's look */
+  border: none;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4; /* Above input */
+  color: rgba(255, 255, 255, 0.7); /* Icon color */
+}
+
+.login-form-container .input-group-text.icon-left {
+  left: 0;
+  padding-left: 1rem; /* Adjust as needed */
+  padding-right: 0.5rem;
+}
+
+.login-form-container .input-group-text.icon-right {
+  right: 0;
+  padding-right: 1rem; /* Adjust as needed */
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.login-form-container .input-group-text i {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Remove Bootstrap's default input-group styling that we don't need for this custom look */
+.login-form-container .input-group > .form-control,
+.login-form-container .input-group > .input-group-text {
+    border-radius: 0.5rem !important; /* Override Bootstrap's split border-radius */
+}
+.login-form-container .input-group > .input-group-text + .form-control,
+.login-form-container .input-group > .form-control + .input-group-text {
+    border-left: 1px solid rgba(255, 255, 255, 0.3) !important; /* Restore border for custom layout */
+}
+
+/* Specific styling for the password toggle icon if it's not using input-group-text directly */
+.login-form-container .password-toggle-icon-wrapper { /* If we use a wrapper instead of input-group-text */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 5;
+    color: rgba(255, 255, 255, 0.7);
+}
+.login-form-container .password-toggle-icon-wrapper i {
+    font-size: 1.2rem;
+}
+
+
+
+.login-form-container .btn-primary {
+  background-color: #007bff; /* Or a theme color */
+  border-color: #007bff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.login-form-container .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.login-form-container .form-links {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.login-form-container .form-links a {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.login-form-container .form-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.login-form-container .form-links span { /* Separator */
+  color: rgba(255, 255, 255, 0.5);
+}

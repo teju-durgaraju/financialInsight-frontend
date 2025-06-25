@@ -1,0 +1,71 @@
+<div class="background-slideshow">
+  @for (imageUrl of backgroundImages; track $index) {
+    <div
+      class="background-image"
+      [style.backgroundImage]="'url(' + imageUrl + ')'"
+      [style.animationDelay]="($index * 2) + 's'"
+      [style.zIndex]="$index === 0 ? 1 : 0">
+      <!-- Initial z-index for first image to prevent blank screen on load, CSS animation will handle layering -->
+    </div>
+  }
+</div>
+<div class="login-form-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    @if (errorMessage()) {
+      <div class="alert alert-danger" @fadeAnimation>
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <div class="form-group input-group" [@shakeAnimation]="emailShakeState()">
+      <span class="input-group-text">
+        <i class="bi bi-envelope"></i>
+      </span>
+      <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email"
+             [class.is-invalid]="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+      @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)) {
+        <div class="invalid-feedback d-block" @fadeAnimation>
+          @if (loginForm.get('email')?.errors?.['required']) {
+            <div>Email is required.</div>
+          }
+          @if (loginForm.get('email')?.errors?.['email']) {
+            <div>Invalid email format.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group input-group" [@shakeAnimation]="passwordShakeState()">
+       <span class="input-group-text">
+        <i class="bi bi-lock"></i>
+      </span>
+      <input [type]="passwordFieldType()" id="password" formControlName="password" class="form-control" placeholder="Enter your password"
+             [class.is-invalid]="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+      <span class="input-group-text icon-right" (click)="togglePasswordVisibility()">
+        <i class="bi" [ngClass]="passwordFieldType() === 'password' ? 'bi-eye-fill' : 'bi-eye-slash-fill'"></i>
+      </span>
+      @if (loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)) {
+        <div class="invalid-feedback d-block" @fadeAnimation>
+          @if (loginForm.get('password')?.errors?.['required']) {
+            <div>Password is required.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || isLoading()">
+      @if (isLoading()) {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="visually-hidden">Loading...</span>
+      } @else {
+        <span>Login</span>
+      }
+    </button>
+  </form>
+  <div class="form-links">
+    <a href="#">Forgot password?</a>
+    <span>|</span>
+    <a href="#">Sign up</a>
+  </div>
+</div>
