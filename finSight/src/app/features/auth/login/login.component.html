@@ -7,14 +7,19 @@
       </div>
     }
 
-    <div class="form-group"> {/* Removed shakeAnimation from here */}
+    <div class="form-group" [@shakeAnimation]="emailShakeState()">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email" class="form-control" [class.is-invalid]="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
-      <!-- @if (loginForm.get('email')?.invalid) { // Simplified condition
-        <div class="invalid-feedback d-block"> {/* Removed @fadeAnimation, removed inner @ifs */}
-          Email has an error (generic message)
+      @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)) {
+        <div class="invalid-feedback d-block" @fadeAnimation>
+          @if (loginForm.get('email')?.errors?.['required']) {
+            <div>Email is required.</div>
+          }
+          @if (loginForm.get('email')?.errors?.['email']) {
+            <div>Invalid email format.</div>
+          }
         </div>
-      } -->
+      }
     </div>
 
     <div class="form-group" [@shakeAnimation]="passwordShakeState()">
