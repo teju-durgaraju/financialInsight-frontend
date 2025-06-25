@@ -1,10 +1,10 @@
-<app-scrolling-insights-ticker></app-scrolling-insights-ticker>
-<div class="login-container mt-4"> {/* Added mt-4 for spacing from ticker */}
+<!-- <app-scrolling-insights-ticker></app-scrolling-insights-ticker> -->
+<div class="login-container mt-4"> <!-- Added mt-4 for spacing from ticker -->
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     @if (errorMessage()) {
       <div class="alert alert-danger" @fadeAnimation>
-        {{ errorMessage() }}
+        <!-- {{ errorMessage() }} --> An error occurred.
       </div>
     }
 
@@ -14,10 +14,10 @@
       @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)) {
         <div class="invalid-feedback d-block" @fadeAnimation>
           @if (loginForm.get('email')?.errors?.['required']) {
-            <div>Email is required.</div>
+            <div><!-- Email is required. --></div>
           }
           @if (loginForm.get('email')?.errors?.['email']) {
-            <div>Invalid email format.</div>
+            <div><!-- Invalid email format. --></div>
           }
         </div>
       }
@@ -29,7 +29,7 @@
       @if (loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)) {
         <div class="invalid-feedback d-block" @fadeAnimation>
           @if (loginForm.get('password')?.errors?.['required']) {
-            <div>Password is required.</div>
+            <div><!-- Password is required. --></div>
           }
         </div>
       }
