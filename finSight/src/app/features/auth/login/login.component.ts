@@ -59,45 +59,27 @@ export class LoginComponent implements OnInit {
   async onSubmit(): Promise<void> {
     this.loginForm.markAllAsTouched(); // Mark fields for immediate feedback
 
-    // Reset shake states before checking validity to allow re-triggering
+    // Reset shake states to 'default' to prepare for potential new shake
     this.emailShakeState.set('default');
     this.passwordShakeState.set('default');
-    // Force change detection if states were already 'default'
-    // This is a bit of a trick for re-triggering. A delay might be more robust.
-    Promise.resolve().then(() => {
-      if (this.loginForm.invalid) {
-        this.errorMessage.set('Please correct the errors in the form.');
+
+    if (this.loginForm.invalid) {
+      this.errorMessage.set('Please correct the errors in the form.');
+      // Use a minimal timeout to allow Angular to process the 'default' state change
+      // before changing to 'shaking', ensuring the animation re-triggers.
+      setTimeout(() => {
         if (this.loginForm.get('email')?.invalid) {
           this.emailShakeState.set('shaking');
         }
         if (this.loginForm.get('password')?.invalid) {
           this.passwordShakeState.set('shaking');
         }
-        return;
-      }
+      }, 0);
+      return;
+    }
 
-      this.isLoading.set(true);
-      this.errorMessage.set(null);
-      console.log('Login form submitted:', this.loginForm.value);
-
-      // Simulate API Call
-      try {
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        console.log('Login successful (simulated)');
-      } catch (error: any) {
-        console.error('Login failed (simulated):', error);
-        this.errorMessage.set(error?.message || 'Login failed. Please try again.');
-      } finally {
-        this.isLoading.set(false);
-      }
-    });
-  }
-
-  // Helper to manage shake animation and reset it
-  // This explicit reset to default might not be needed if animation naturally ends there
-  // and we correctly re-trigger by changing state from default -> shaking.
-  // For now, the Promise.resolve().then() in onSubmit helps re-trigger.
-}
+    // If form is valid, proceed with submission
+    this.isLoading.set(true);
     this.errorMessage.set(null);
     console.log('Login form submitted:', this.loginForm.value);
 
@@ -118,4 +100,9 @@ export class LoginComponent implements OnInit {
       this.isLoading.set(false);
     }
   }
+
+  // Helper to manage shake animation and reset it
+  // This explicit reset to default might not be needed if animation naturally ends there
+  // and we correctly re-trigger by changing state from default -> shaking.
+  // For now, the setTimeout() in onSubmit helps re-trigger.
 }
