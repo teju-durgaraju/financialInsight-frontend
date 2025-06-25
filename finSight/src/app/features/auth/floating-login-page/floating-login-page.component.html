@@ -3,7 +3,7 @@
     <div
       class="background-image"
       [style.backgroundImage]="'url(' + imageUrl + ')'"
-      [style.animationDelay]="($index * 2) + 's'"
+      [style.animationDelay]="($index * 5) + 's'"
       [style.zIndex]="$index === 0 ? 1 : 0">
       <!-- Initial z-index for first image to prevent blank screen on load, CSS animation will handle layering -->
     </div>

@@ -28,18 +28,18 @@
   background-size: cover;
   background-position: center center;
   opacity: 0;
-  /* Each image is visible for 2s, fades over 0.5s in/out. Total cycle for 5 images = 10s. */
-  animation-name: imageCrossfade;
+  /* Each image is visible for 5s, fades over 1s in/out. Total cycle for 5 images = 25s. */
+  animation-name: imageCrossfadeRevised; /* Renamed keyframes */
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  animation-duration: 10s; /* 5 images * 2s per image */
+  animation-duration: 25s; /* 5 images * 5s per image */
 }
 
-@keyframes imageCrossfade {
+@keyframes imageCrossfadeRevised { /* Renamed and updated keyframes */
   0% { opacity: 0; }
-  5% { opacity: 1; } /* Fade in 0.5s (5% of 10s) */
-  20% { opacity: 1; } /* Stay visible for 1.5s (15% of 10s) (total visible 2s with fade in) */
-  25% { opacity: 0; } /* Fade out 0.5s (5% of 10s) */
+  4% { opacity: 1; }   /* Fade in 1s (1s / 25s = 4%) */
+  16% { opacity: 1; }  /* Stay visible for 3s ( (1s_fade_in + 3s_visible) / 25s = 16%) */
+  20% { opacity: 0; }  /* Fade out 1s ( (1s_fade_in + 3s_visible + 1s_fade_out) / 25s = 20%) */
   100% { opacity: 0; }
 }
 
